@@ -1,70 +1,54 @@
-import axios from 'axios'
-import React, { useActionState } from 'react'
+import axios from "axios";
+import React, { useActionState, useState } from "react";
 import { useNavigate } from "react-router";
 
 export default function Register() {
+  const [state, formAction, isPending] = useActionState(submitHandler, {});
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
-
-  // Handles form action state
-  const [state, formAction, isPending] =
-    useActionState(submitHandler, {})
-
-
-  // Runs when form submits
   async function submitHandler(prev, formData) {
+    setError("");
 
-    // Get form values
-    const email = formData.get("email")
-    const password = formData.get("pass")
+    try {
+      const email = formData.get("email");
+      const password = formData.get("pass");
 
-    // POST request to create user
-    const res = await axios.post(
-      "http://localhost:3001/api/users",
-      {
-        email: email,
-        password: password
-      }
-    )
+      await axios.post("http://localhost:3001/api/users", {
+        email,
+        password,
+      });
 
-    // Debug logs
-    console.log(res.data);
-    console.log(res.data.token);
-
-    // TODO:Done
-    // redirect to login page
-    navigate("/login");
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+      setError("Registration failed. Try a different email or password.");
+    }
   }
 
   return (
     <div>
-
       <h1>Register</h1>
 
+      {error && <p className="text-red-500">{error}</p>}
+
       <form action={formAction}>
+        <input className="input" type="text" name="email" placeholder="Email" />
 
-        {/* Email input */}
         <input
-          className='input'
-          type="text"
-          name="email"
-        />
-
-        {/* Password input */}
-        <input
-          className='input'
-          type="text"
+          className="input"
+          type="password"
           name="pass"
+          placeholder="Password"
         />
 
-        {/* Submit button */}
         <input
-          type='submit'
-          value={"Submit"}
-          className='btn'
+          type="submit"
+          value={isPending ? "Registering..." : "Submit"}
+          className="btn"
+          disabled={isPending}
         />
-
       </form>
     </div>
-  )
+  );
 }
