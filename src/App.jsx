@@ -11,6 +11,7 @@ import Secret from "./pages/Secret";
 import Profile from "./pages/Profile";
 
 import ProtectedLayout from "./pages/ProtectedLayout";
+import CreateEvent from "./pages/CreateEvent";
 
 
 import { useState } from "react";
@@ -49,6 +50,7 @@ const App = () => {
          <Route element={<ProtectedLayout />}>
   <Route path="/secret" element={<Secret />} />
   <Route path="/profile" element={<Profile />} />
+  <Route path="/create-event" element={<CreateEvent />} />
 </Route>
        </Routes>
      </section>
