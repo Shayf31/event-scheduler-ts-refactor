@@ -24,7 +24,7 @@ export default function Login({ setUsers }) {
 
     // Send login request to API
     const res = await axios.post(
-      "http://localhost:3000/api/auth/login",
+      "http://localhost:3001/api/auth/login",
       {
         email: email,
         password: password,

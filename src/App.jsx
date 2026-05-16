@@ -1,73 +1,73 @@
 // Import routing components from React Router
 import { Route, Routes } from "react-router";
 
+
 // Import page components
+import Home from "./pages/Home";
+import EventDetails from "./pages/EventDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Secret from "./pages/Secret";
 import Profile from "./pages/Profile";
 
-// React hook for state management
+
 import { useState } from "react";
 
+
 const App = () => {
+ // Stores authenticated users in state
+ // Right now this is mostly demo/practice state
+ const [authenticatedUsers, setAuthenticatedUsers] = useState([]);
 
-  // Stores authenticated users in state
-  // Right now this is mostly demo/practice state
-  const [authenticatedUsers, setAuthenticatedUsers] = useState([])
 
-  return (
-    <div className="">
+ return (
+   <div className="">
+     {/* Navigation/header section */}
+     <section className="flex justify-between items-center bg-amber-200">
+       {/* Routes decides which component/page to render */}
+       <Routes>
+         <Route path="/" element={<Home />} />
 
-      {/* Navigation/header section */}
-      <section className="flex justify-between items-center bg-amber-200">
 
-        {/* Routes decides which component/page to render */}
-        <Routes>
+         <Route path="/events/:id" element={<EventDetails />} />
 
-          {/* /login route */}
-          {/* Passing setAuthenticatedUsers as a prop called setUsers */}
-          <Route
-            path="/login"
-            element={<Login setUsers={setAuthenticatedUsers} />}
-          />
 
-          {/* /register route */}
-          <Route
-            path="/register"
-            element={<Register />}
-          />
+         {/* /login route */}
+         {/* Passing setAuthenticatedUsers as a prop called setUsers */}
+         <Route
+           path="/login"
+           element={<Login setUsers={setAuthenticatedUsers} />}
+         />
 
-          {/* /secret route */}
-          <Route
-            path="/secret"
-            element={<Secret />}
-          />
 
-          {/* /profile route */}
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
+         {/* /register route */}
+         <Route path="/register" element={<Register />} />
 
-        </Routes>
-      </section>
 
-      {/* Debug/testing section */}
-      <section>
+         {/* /secret route */}
+         <Route path="/secret" element={<Secret />} />
 
-        {/* Shows number of authenticated users */}
-        {authenticatedUsers.length}
 
-        {/* Loops through users array and displays emails */}
-        {authenticatedUsers.map(u =>
-          <p>{u.email}</p>
-        )}
+         {/* /profile route */}
+         <Route path="/profile" element={<Profile />} />
+       </Routes>
+     </section>
 
-      </section>
 
-    </div>
-  );
+     {/* Debug/testing section */}
+     <section>
+       {/* Shows number of authenticated users */}
+       {authenticatedUsers.length}
+
+
+       {/* Loops through users array and displays emails */}
+       {authenticatedUsers.map((u) => (
+         <p>{u.email}</p>
+       ))}
+     </section>
+   </div>
+ );
 };
+
 
 export default App;

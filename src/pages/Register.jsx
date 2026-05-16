@@ -16,7 +16,7 @@ export default function Register() {
 
     // POST request to create user
     const res = await axios.post(
-      "http://localhost:3000/api/users",
+      "http://localhost:3001/api/users",
       {
         email: email,
         password: password
