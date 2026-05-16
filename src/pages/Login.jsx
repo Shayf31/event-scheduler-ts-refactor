@@ -38,6 +38,7 @@ export default function Login({ setUsers }) {
     )
 
     // Redirect user to home page
+    
     navigate('/')
 
     // TODO:
