@@ -26,7 +26,7 @@ export default function Profile() {
 
       // GET request with Authorization header
       const res = await axios(
-        "http://localhost:3000/api/auth/profile",
+        "http://localhost:3001/api/auth/profile",
         {
           headers: {
             "Authorization": `Bearer ${token}`
