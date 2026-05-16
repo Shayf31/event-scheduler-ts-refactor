@@ -10,6 +10,8 @@ import Register from "./pages/Register";
 import Secret from "./pages/Secret";
 import Profile from "./pages/Profile";
 
+import ProtectedLayout from "./pages/ProtectedLayout";
+
 
 import { useState } from "react";
 
@@ -44,12 +46,10 @@ const App = () => {
          <Route path="/register" element={<Register />} />
 
 
-         {/* /secret route */}
-         <Route path="/secret" element={<Secret />} />
-
-
-         {/* /profile route */}
-         <Route path="/profile" element={<Profile />} />
+         <Route element={<ProtectedLayout />}>
+  <Route path="/secret" element={<Secret />} />
+  <Route path="/profile" element={<Profile />} />
+</Route>
        </Routes>
      </section>
 
