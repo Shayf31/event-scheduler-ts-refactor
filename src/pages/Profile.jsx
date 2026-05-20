@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 
+// This page fetches and displays the logged-in user's profile
 export default function Profile() {
 
   // Stores profile data from API
@@ -25,6 +26,7 @@ export default function Profile() {
     async function x () {
 
       // GET request with Authorization header
+      // Authorization header proves user is authenticated
       const res = await axios(
         "http://localhost:3001/api/auth/profile",
         {
@@ -44,8 +46,9 @@ export default function Profile() {
     x()
 
   }, [])
-
+ {/* Displays user email from profile data */}
   return (
+    
     <div>
       Profile and email: {profileData?.email}
     </div>
