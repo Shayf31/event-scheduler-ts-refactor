@@ -46,6 +46,8 @@ export default function Profile() {
     x()
 
   }, [])
+
+  
  {/* Displays user email from profile data */}
   return (
     

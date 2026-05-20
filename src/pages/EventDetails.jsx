@@ -16,7 +16,6 @@ export default function EventDetails() {
 
   // State to store the single event we fetch from the API
  // Starts as null because we do not have the event yet
-
  const [event, setEvent] = useState(null);
 
 // Runs when the page loads

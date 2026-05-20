@@ -25,10 +25,6 @@ export default function CreateEvent() {
 
     // Send POST request to create a new event
     // The Authorization header sends the token to the backend
-    //
-    // This satisfies:
-    // FR017 Create Event Page
-    // FR018 Token Injection in Requests
     const res = await axios.post("http://localhost:3001/api/events", newEvent, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -40,7 +36,6 @@ export default function CreateEvent() {
   }
 
   // useActionState handles form submission state
-  //
   // state:
   // stores returned values, not heavily used here
   //

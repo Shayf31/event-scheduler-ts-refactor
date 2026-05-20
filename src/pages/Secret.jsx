@@ -28,6 +28,6 @@ export default function Secret({ users }) {
   }
 
   // If the user has a token,
- // they are allowed to see this page
+  // they are allowed to see this page
   return <div>Secret</div>;
 }

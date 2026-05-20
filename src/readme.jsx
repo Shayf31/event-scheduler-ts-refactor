@@ -1,34 +1,32 @@
-// App.jsx - sets up routes
+// User visits homepage
+// → Home fetches all events
+// → User clicks event
+// → EventDetails fetches one event
 
-// MainLayout.jsx - holds the cart state + navbar
+// User registers
+// → Register sends POST /api/users
+// → redirects to login
 
-// HomePage.jsx - fetches products from Fake Store API
+// User logs in
+// → Login sends POST /api/auth/login
+// → saves JWT token in localStorage
 
-// ProductCard.jsx - shows each product and has Add to Cart button
+// User visits protected page
+// → ProtectedLayout checks token
+// → if token exists, page shows
+// → if no token, redirect to login
 
-// CartUtils.jsx - updates the cart
+// User creates event
+// → CreateEvent sends POST /api/events with token
+// → backend creates event
+// → app redirects home
 
-// MainLayout.jsx - navbar cart count updates
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// npm run seed
+// That populated the database with starter events like:
+// Oktoberfest
+// Berlin Marathon
+// Tech Conference
+// Summer Festival
 
 
 
@@ -42,17 +40,22 @@
 
 
 
-// Flow
-// 1. App loads
-// 2. React Router shows MainLayout
-// 3. MainLayout creates cart state: []
-// 4. HomePage appears inside Outlet
-// 5. HomePage fetches products from API
-// 6. Products are stored in products state
-// 7. HomePage maps products into ProductCards
-// 8. User clicks Add to Cart
-// 9. ProductCard calls onAdd
-// 10. HomePage runs setCart(addToCart(cart, product))
-// 11. CartUtils updates the cart array
-// 12. MainLayout re-renders
-// 13. Cart count in navbar updates
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
