@@ -1,24 +1,55 @@
+// useNavigate lets us move users to another page programmatically
 import { useNavigate } from "react-router";
+
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+// Main homepage component - displays all events
 export default function Home() {
-  // This stores the events we get from the API
+
+  // This stores the events we get from the API - starts as empty
   const [events, setEvents] = useState([]);
 
+// React Router navigation function
 const navigate = useNavigate();
 
-  // This runs once when the Home page loads
+  // This runs only once when the Home page loads
+  //  [] means "run only once"
   useEffect(() => {
+
+    // Async function to fetch events from backend
     async function getEvents() {
-      // Ask the backend API for all events
+
+      
+      // Send GET request to backend API
+     // Backend returns all events
       const res = await axios.get("http://localhost:3001/api/events");
 
+      // Debugging: can remove later
       console.log(res.data);
+
       // Save the events into React state
+      // IMPORTANT:
+     // API returns an object:
+     // {
+     //   results: [...]
+     // }
+     //
+     // So we specifically store:
+     // res.data.results
+     //
+     // Earlier bug:
+     // We accidentally stored res.data
+     // which caused:
+     // "events.map is not a function"
+     //
+     // because res.data was an object,
+     // not an array.
+
       setEvents(res.data.results);
     }
 
+    // Call async function
     getEvents();
   }, []);
 
@@ -31,10 +62,19 @@ const navigate = useNavigate();
 
     <div className="grid gap-4">
 
+{/* Loop through all events */}
+       {/* map() creates one card per event */}
       {events.map((event) => (
 
         <div
+        // React requires unique key for lists
           key={event.id}
+          // When card clicked:
+           // navigate user to dynamic event page
+           //
+           // Example:
+           // /events/1
+           // /events/2
   onClick={() => navigate(`/events/${event.id}`)}
           className="bg-white shadow-md rounded-xl p-4 border cursor-pointer hover:scale-[1.01] transition"
         >
