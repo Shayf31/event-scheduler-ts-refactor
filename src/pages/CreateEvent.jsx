@@ -76,17 +76,6 @@ export default function CreateEvent() {
           placeholder="Location"
         />
 
-        <input
-          className="input input-bordered"
-          name="latitude"
-          placeholder="Latitude"
-        />
-
-        <input
-          className="input input-bordered"
-          name="longitude"
-          placeholder="Longitude"
-        />
 
         <button className="btn btn-primary" type="submit" disabled={isPending}>
           {isPending ? "Creating..." : "Create Event"}

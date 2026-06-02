@@ -50,10 +50,25 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Upcoming Events</h1>
+    <div className="min-h-screen bg-slate-100 px-4 py-8 sm:px-6 lg:px-8">
+      {/* Header section */}
+      <div className="mb-8">
+        <p className="text-sm font-semibold uppercase tracking-wide text-cyan-600">
+          Discover what is happening next
+        </p>
 
-      <div className="grid gap-4">
+        <h1 className="text-4xl font-bold text-slate-900">
+          Upcoming Events
+        </h1>
+
+        <p className="mt-2 max-w-2xl text-slate-600">
+          Browse events, view details, and create your own when you are logged in.
+        </p>
+      </div>
+
+      {/* Grid container for event cards */}
+      {/* Mobile: 1 column | Tablet: 2 columns | Desktop: 3 columns */}
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {/* Loop through all events */}
         {/* map() creates one card per event */}
         {events.map((event) => (
@@ -67,15 +82,30 @@ export default function Home() {
             // /events/1
             // /events/2
             onClick={() => navigate(`/events/${event.id}`)}
-            className="bg-white shadow-md rounded-xl p-4 border cursor-pointer hover:scale-[1.01] transition"
+            className="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-6 shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
           >
-            <h2 className="text-xl font-bold mb-2">{event.title}</h2>
+            {/* Small category/date style badge */}
+            <div className="mb-4 inline-flex rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">
+              Event
+            </div>
 
-            <p className="text-gray-600 mb-2">{event.description}</p>
+            <h2 className="mb-3 text-2xl font-bold text-slate-900 group-hover:text-cyan-700">
+              {event.title}
+            </h2>
 
-            <p className="text-sm">📅 {event.date}</p>
+            <p className="mb-5 line-clamp-3 text-slate-600">
+              {event.description}
+            </p>
 
-            <p className="text-sm">📍 {event.location}</p>
+            <div className="space-y-2 border-t border-slate-100 pt-4 text-sm text-slate-700">
+              <p>📅 {event.date}</p>
+
+              <p>📍 {event.location}</p>
+            </div>
+
+            <p className="mt-5 text-sm font-semibold text-cyan-600">
+              View details →
+            </p>
           </div>
         ))}
       </div>
