@@ -57,12 +57,11 @@ export default function Home() {
           Discover what is happening next
         </p>
 
-        <h1 className="text-4xl font-bold text-slate-900">
-          Upcoming Events
-        </h1>
+        <h1 className="text-4xl font-bold text-slate-900">Upcoming Events</h1>
 
         <p className="mt-2 max-w-2xl text-slate-600">
-          Browse events, view details, and create your own when you are logged in.
+          Browse events, view details, and create your own when you are logged
+          in.
         </p>
       </div>
 
@@ -98,7 +97,14 @@ export default function Home() {
             </p>
 
             <div className="space-y-2 border-t border-slate-100 pt-4 text-sm text-slate-700">
-              <p>📅 {event.date}</p>
+              <p>
+                📅{" "}
+                {new Date(event.date).toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </p>
 
               <p>📍 {event.location}</p>
             </div>
