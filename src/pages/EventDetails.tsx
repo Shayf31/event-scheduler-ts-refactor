@@ -5,24 +5,32 @@ import React, { useEffect, useState } from "react";
 // Example: /events/3 gives us id = "3"
 import { useParams } from "react-router";
 
+// Import shared Event type
+import type { Event } from "../types/events";
+
 // EventDetails component
 // This page displays ONE event based on the ID in the URL
 export default function EventDetails() {
   // Get the event id from the URL
   // If URL is /events/3, id will be "3"
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   // State to store the single event we fetch from the API
   // Starts as null because we do not have the event yet
-  const [event, setEvent] = useState(null);
+  const [event, setEvent] = useState<Event | null>(null);
 
   // Runs when the page loads
   // Also runs again if the id changes
   useEffect(() => {
+    // If there is no id, stop the function
+    if (!id) return;
+
     // Async function to fetch one event
-    async function getEvent() {
+    async function getEvent(): Promise<void> {
       // Send GET request to backend for one event by ID
-      const res = await axios.get(`http://localhost:3001/api/events/${id}`);
+      const res = await axios.get<Event>(
+        `http://localhost:3001/api/events/${id}`
+      );
 
       // Save the event data into state
       setEvent(res.data);
