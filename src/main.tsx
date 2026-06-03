@@ -8,13 +8,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 // Main App component
-import App from './App.jsx'
+import App from './App'
 
 // BrowserRouter enables routing/navigation
 import { BrowserRouter } from 'react-router'
 
 // Mount React app into div#root in index.html
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
 
