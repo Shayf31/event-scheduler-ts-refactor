@@ -50,7 +50,7 @@ export default function CreateEvent() {
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Create Event</h1>
 
- {/* Create event form */}
+      {/* Create event form */}
       <form action={formAction} className="flex flex-col gap-4 max-w-xl">
         <input
           className="input input-bordered"
@@ -75,7 +75,6 @@ export default function CreateEvent() {
           name="location"
           placeholder="Location"
         />
-
 
         <button className="btn btn-primary" type="submit" disabled={isPending}>
           {isPending ? "Creating..." : "Create Event"}
