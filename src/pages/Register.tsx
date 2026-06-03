@@ -14,15 +14,21 @@ export default function Register() {
   //
   // isPending:
   // true while request is running
-  const [state, formAction, isPending] = useActionState(submitHandler, {});
+  const [state, formAction, isPending] = useActionState(
+  submitHandler,
+  undefined
+);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   // Used to redirect user after successful signup
   const navigate = useNavigate();
 
   // submitHandler runs when the form is submitted
-  async function submitHandler(prev, formData) {
+  async function submitHandler(
+  prev: void,
+  formData: FormData
+): Promise<void> {
     // Clear any previous errors before new request
     setError("");
 
