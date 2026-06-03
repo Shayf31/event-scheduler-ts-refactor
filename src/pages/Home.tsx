@@ -1,3 +1,5 @@
+import type { Event } from "../types/events";
+
 // useNavigate lets us move users to another page programmatically
 import { useNavigate } from "react-router";
 
@@ -6,8 +8,12 @@ import React, { useEffect, useState } from "react";
 
 // Main homepage component - displays all events
 export default function Home() {
+  interface EventsResponse {
+    results: Event[];
+  }
+
   // This stores the events we get from the API - starts as empty
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
 
   // React Router navigation function
   const navigate = useNavigate();
@@ -19,7 +25,9 @@ export default function Home() {
     async function getEvents() {
       // Send GET request to backend API
       // Backend returns all events
-      const res = await axios.get("http://localhost:3001/api/events");
+      const res = await axios.get<EventsResponse>(
+        "http://localhost:3001/api/events",
+      );
 
       // Debugging: can remove later
       console.log(res.data);
