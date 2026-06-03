@@ -2,9 +2,14 @@ import axios from "axios";
 import React, { useActionState, useState } from "react";
 import { useNavigate } from "react-router";
 
+// Type for the login API response
+// Backend sends back a JWT token after successful login
+interface LoginResponse {
+  token: string;
+}
+
 // This page authenticates users
-// Setusers - unused - left over starter code - can remove later
-export default function Login({ setUsers }) {
+export default function Login() {
   // useActionState = handles form submissions
   // state:
   // stores returned values (not heavily used here)
@@ -14,30 +19,36 @@ export default function Login({ setUsers }) {
   //
   // isPending:
   // true while login request is running
-  const [state, formAction, isPending] = useActionState(submitHandler, {});
+  const [state, formAction, isPending] = useActionState(submitHandler, undefined);
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
 
   // Used to redirect user after successful login
   const navigate = useNavigate();
 
   // submitHandler runs when the login form is submitted
-  async function submitHandler(prev, formData) {
+  async function submitHandler(
+    prev: void,
+    formData: FormData
+  ): Promise<void> {
     // Clear previous errors before new login attempt
     setError("");
 
     try {
       // Get values from form inputs
       // Reads inputs by their "name"
-      const email = formData.get("email");
-      const password = formData.get("pass");
+      const email = formData.get("email") as string;
+      const password = formData.get("pass") as string;
 
       // Send POST request to backend login endpoint
       // Backend validates credentials
-      const res = await axios.post("http://localhost:3001/api/auth/login", {
-        email,
-        password,
-      });
+      const res = await axios.post<LoginResponse>(
+        "http://localhost:3001/api/auth/login",
+        {
+          email,
+          password,
+        }
+      );
 
       // Backend returns a JWT token
       // Save token into localStorage
@@ -61,7 +72,7 @@ export default function Login({ setUsers }) {
       className="min-h-screen flex items-center justify-center bg-cover bg-center relative grayscale"
       style={{
         backgroundImage:
-          "url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop')",
+          "url('https://images.unsplash.com/photo-1638132704795-6bb223151bf7?q=80&w=2070&auto=format&fit=crop')",
       }}
     >
       {/* Dark overlay */}

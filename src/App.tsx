@@ -17,7 +17,12 @@ import ProtectedLayout from "./pages/ProtectedLayout";
 // Imported starter code from instructor
 // Not heavily used anymore because we now use JWT tokens in localStorage
 const App = () => {
-  const [authenticatedUsers, setAuthenticatedUsers] = useState([]);
+  type AuthenticatedUser = {
+  email: string;
+};
+
+const [authenticatedUsers, setAuthenticatedUsers] =
+  useState<AuthenticatedUser[]>([]);
 
   return (
     <div className="">
@@ -73,7 +78,7 @@ const App = () => {
         {/* Passing setAuthenticatedUsers as a prop called setUsers */}
         <Route
           path="/login"
-          element={<Login setUsers={setAuthenticatedUsers} />}
+          element={<Login />}
         />
 
         {/* /register route */}
@@ -85,7 +90,7 @@ const App = () => {
             redirect to /login
         */}
         <Route element={<ProtectedLayout />}>
-          <Route path="/secret" element={<Secret />} />
+          <Route path="/secret" element={<Secret users={[]} />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-event" element={<CreateEvent />} />
         </Route>
