@@ -90,7 +90,7 @@ const [authenticatedUsers, setAuthenticatedUsers] =
             redirect to /login
         */}
         <Route element={<ProtectedLayout />}>
-          <Route path="/secret" element={<Secret users={[]} />} />
+          <Route path="/secret" element={<Secret />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/create-event" element={<CreateEvent />} />
         </Route>

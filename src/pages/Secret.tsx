@@ -5,27 +5,22 @@ import { useNavigate } from "react-router";
 // part of the instructor starter code
 // simple example of a protected page
 
-export default function Secret({ users }) {
+export default function Secret() {
   // React Router navigation
   const navigate = useNavigate();
 
   // Runs once on component mount
   useEffect(() => {
     // Check if token exists in local storage
-    //Token is created during login
-    const isToken = JSON.parse(localStorage.getItem("token"));
+    // Token is created during login
+
+    const storedToken: string | null = localStorage.getItem("token");
 
     // If no token redirect to login
-    if (isToken == null) navigate("/login");
-  }, []);
-
-  // Placeholder auth function
-  function isAuthenticated() {
-    // Could eventually:
-    // validate token
-    // check API
-    // redirect users
-  }
+    if (storedToken == null) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
   // If the user has a token,
   // they are allowed to see this page
